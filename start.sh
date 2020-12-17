@@ -22,7 +22,7 @@ cp .profile .profile_bkp
 sleep 5
 echo "export KEYPATH=$HOME/keys/my-wallet" >> .profile
 echo "export MINA_PUBLIC_KEY=$(cat $HOME/keys/my-wallet.pub)" >> .profile
-echo "export CODA_PRIVKEY_PASS=druvatara1" >> .profile
+echo "export CODA_PRIVKEY_PASS=admin" >> .profile
 source .profile
 sleep 3
 cd ~ 
