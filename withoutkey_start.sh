@@ -14,7 +14,6 @@ cp .profile .profile_bkp
 sleep 5
 echo "export KEYPATH=$HOME/keys/my-wallet" >> .profile
 echo "export MINA_PUBLIC_KEY=$(cat $HOME/keys/my-wallet.pub)" >> .profile
-echo "export CODA_PRIVKEY_PASS=naughty blue worm" >> .profile
 source .profile
 sleep 3
 cd ~ 
@@ -31,7 +30,12 @@ sleep 3
 source .profile
 sleep 3
 source .profile
-sudo docker run --name mina -d --restart always -p 8301-8305:8301-8305 -v $(pwd)/peers.txt:/root/peers.txt -v $(pwd)/keys:/root/keys:ro -v $(pwd)/.coda-config:/root/.coda-config minaprotocol/mina-daemon-baked:0.2.0-efc44df-testworld-af5e10e daemon -peer-list-file $HOME/peers.txt -block-producer-key $KEYPATH -block-producer-password $CODA_PRIVKEY_PASS -insecure-rest-server -file-log-level Debug -log-level Info
+docker rm -f mina
+sleep 3
+rm -rf .coda-config
+source .profile
+sudo docker run --name mina -d --restart always -p 8301-8305:8301-8305 -v $(pwd)/peers.txt:/root/peers.txt -v $(pwd)/keys:/root/keys:ro -v $(pwd)/.coda-config:/root/.coda-config minaprotocol/mina-daemon-baked:0.2.0-efc44df-testworld-af5e10e daemon -peer-list-file $HOME/peers.txt -block-producer-key $KEYPATH -block-producer-password 'naughty blue worm' -insecure-rest-server -file-log-level Info -log-level Info
+sudo docker logs --tail 1000 mina -f
 sleep 5
 sudo docker exec -it mina coda client status
 sleep 10
