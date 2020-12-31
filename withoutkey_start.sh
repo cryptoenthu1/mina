@@ -4,7 +4,7 @@ echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc
 sleep 5
 sudo apt-get update
 sleep 5
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.2.0-efc44df --allow-downgrades
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.2.2-b7eff8e --allow-downgrades
 sleep 5
 coda version
 sleep 3
@@ -34,9 +34,3 @@ docker rm -f mina
 sleep 3
 rm -rf .coda-config
 source .profile
-sudo docker run --name mina -d --restart always -p 8301-8305:8301-8305 -v $(pwd)/peers.txt:/root/peers.txt -v $(pwd)/keys:/root/keys:ro -v $(pwd)/.coda-config:/root/.coda-config minaprotocol/mina-daemon-baked:0.2.0-efc44df-testworld-af5e10e daemon -peer-list-file $HOME/peers.txt -block-producer-key $KEYPATH -block-producer-password 'naughty blue worm' -insecure-rest-server -file-log-level Info -log-level Info
-sudo docker logs --tail 1000 mina -f
-sleep 5
-sudo docker exec -it mina coda client status
-sleep 10
-sudo docker logs --tail 1000 mina -f
