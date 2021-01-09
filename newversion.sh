@@ -1,4 +1,4 @@
-sudo apt-get remove mina-testnet-postake-medium-curves
+sudo apt-get remove -y mina-testnet-postake-medium-curves
 sleep 2
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sleep 2
