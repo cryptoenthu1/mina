@@ -9,3 +9,8 @@ sleep 2
 wget -O ~/peers.txt https://raw.githubusercontent.com/MinaProtocol/coda-automation/bug-bounty-net/terraform/testnets/testworld/peers.txt
 sleep 2
 coda version
+sudo docker run --name mina -d --restart always -p 8301-8305:8301-8305 -v $(pwd)/peers.txt:/root/peers.txt -v $(pwd)/keys:/root/keys:ro -v $(pwd)/.coda-config:/root/.coda-config minaprotocol/mina-daemon-baked:0.2.2-1-b14e324-testworld-7bca682 daemon -peer-list-file $HOME/peers.txt -block-producer-key $KEYPATH -block-producer-password $MINE_PRIVKEY_PASS -insecure-rest-server -file-log-level Info -log-level Info -super-catchup
+sleep 2
+sudo docker exec -it mina coda client status
+sleep 2
+sudo docker logs --tail 1000 mina -f
