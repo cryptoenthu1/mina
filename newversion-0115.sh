@@ -1,6 +1,6 @@
 docker rm -f mina
 sleep 2
-rm -rf 
+rm -rf $HOME/.coda-config
 sudo apt-get remove -y mina-testnet-postake-medium-curves
 sleep 2
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
