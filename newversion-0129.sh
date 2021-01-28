@@ -7,14 +7,14 @@ echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc
 sleep 2
 sudo apt-get update
 sleep 2
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.2.10-62e11d5
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.2.11-d075f83
 sleep 2
 wget -O ~/peers.txt https://raw.githubusercontent.com/MinaProtocol/coda-automation/bug-bounty-net/terraform/testnets/testworld/peers.txt
 sleep 2
 coda version
 sleep 2
 source .profile
-sudo docker run --name mina -d --restart always -p 8301-8305:8301-8305 -v $(pwd)/peers.txt:/root/peers.txt -v $(pwd)/keys:/root/keys:ro -v $(pwd)/.coda-config:/root/.coda-config minaprotocol/mina-daemon-baked:0.2.10-62e11d5-testworld-62e11d5 daemon -peer-list-file $HOME/peers.txt -block-producer-key $KEYPATH -block-producer-password $MINA_PRIVKEY_PASS -insecure-rest-server -file-log-level Info -log-level Info -super-catchup
+sudo docker run --name mina -d --restart always -p 8301-8305:8301-8305 -v $(pwd)/peers.txt:/root/peers.txt -v $(pwd)/keys:/root/keys:ro -v $(pwd)/.coda-config:/root/.coda-config minaprotocol/mina-daemon-baked:0.2.11-d075f83-testworld-d075f83 daemon -peer-list-file $HOME/peers.txt -block-producer-key $KEYPATH -block-producer-password $MINA_PRIVKEY_PASS -insecure-rest-server -file-log-level Info -log-level Info -super-catchup
 sleep 2
 sudo docker exec -it mina coda client status
 sleep 2
